@@ -12,6 +12,34 @@ So i have the following questions for you?
  to have a client and server folder for frontend and backend respectively, is it recommended to do so?
 ```
 
+Response summary
+1. The systems requirements: 
+    Operating systems: Windows/, macOS, Linus
+    Node.js: Version 18.17 or later
+    Browser: Chrome, Firefox or Edge
+
+2. On the terminal, Next.js is installed with this starter command;
+     ```bash
+        npx create-next-app@latest my-app
+     ```
+
+3. Recommended Projects structure;
+    
+    ```
+       project-root/
+           client/
+              pages/
+              components/
+              public/
+
+           server/
+               app/
+               requirements.txt
+
+           package.json
+           README.md
+    ```
+
 
 
 
