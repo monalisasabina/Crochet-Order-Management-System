@@ -1,5 +1,7 @@
 # AI PROMPT JOURNAL
 
+This journal provides guidance for understanding Next.js full-stack development.
+
 ## 1. Next.js Installation (9/12/2025)
 
 Prompt
@@ -162,8 +164,7 @@ i want to start putting models in my Next.js backend and I'm using Prisma.
 I'm aware they are done in the schema.prisma file. 
 There several things i want to know;
 1. there are different data types, how are they put there? 
-2. there are three types of model relationship, one to one, one to many and 
-many to many, how are done in Prisma? 
+2. there are three types of model relationship, one to one, one to many and many to many, how are done in Prisma? 
 3. is migration done after modelling? 
 I'm learning Next.js, don't put complex content
 ```
@@ -171,15 +172,88 @@ I'm learning Next.js, don't put complex content
 An example of a model;
 ```
 model User {
-   id         Int
+   id         Int     @id @default(autoincrement())
    name       String
-   email
-   createdAt
+   email      String  @unique
+   createdAt  Date    @default(now())
 }
 ```
 
+2. Relationships
+ - ONE TO ONE
+   User has one profile and each profile belongs to one client
+   ```
+   model User {
+      id       Int    @id @default(autoincrement())
+      profile  Profile?
+   }
 
-## Understanding Verification
+   model Profile {
+      id      Int   @id @default(autoincrement())
+
+      user    User  @relation(fields: [userId], references[id])
+      userId  Int   @unique
+   }
+   ```
+
+ - ONE TO MANY
+A user can have many posts but a post can have one user.
+
+ ```
+   model User {
+      id    Int     @id @default(autoincrement())
+
+      posts Post[]
+   }
+
+   model Post {
+      id     Int   @id @default(autoincrement())
+
+      user   User  @relation(fields: [userId], references: [id])
+      userId Int
+   }
+
+ ```
+
+ - MANY TO MANY
+ A student can have many courses and a course can have many students.
+
+ ```
+   model Student {
+      id      Int       @id @default(autoincrement())
+
+      courses Course[]
+   }
+
+   model Course {
+      id       Int       @id @default(autoincrement())
+
+      students Student[]
+   }
+
+ ```
+
+ 
+ 3. Migration
+ - After modelling, migration can be done using the following command;
+ ```
+  npx prisma migrate dev --name init
+ ```
+
+- Incase you have only one model;
+```
+  npx prisma migrate dev --name add_order_model
+```
+
+- After running the command, you check the migrations directory under the prisma directory.
+
+- To inspect the database, you use the Prisma Studio. This lets you view tables, inspect relations and confirm migration has worked.
+```
+   npx prisma studio
+```
+   
+
+## 5. Understanding Verification
 
 prompt
 ```
@@ -236,3 +310,26 @@ Could you:
 - Point out any Python SQLAIchemy habits that might be showing in my prisma code?"
 
 ```
+
+Summary
+1. The models are valid. Although just a few fixes here and there.
+
+2. Improvements
+  - Change DATABASE-URL TO DATABASE_URL
+  - In Notification model, I didn't put the data type. I have to add Boolean
+  -model fields are written in camelCase, so the 'Title' field has to be 'title'
+  - Recommended to add updatedAt field in Order, Client and Admin 
+  - make endDate field in Order model optional
+  ```endDate DateTime?```
+  - make the userName and email under Admin model to be unique to prevents duplicate admins.
+  - Improve on the Notification model by adding message and createdAt field
+
+3. Learning suggestions
+  - Prisma Client queries
+  - Api routing
+  - Auth basics like password hashing
+  - Migrations
+
+4. Python SQLAIchemy habits noted
+  - Developing tables first
+  - Explicit join tables every where. In SQLAIchemy you often create join tables manualyy but in Prisma, many to many is automatic and you don't write join tables inless you need extra fields

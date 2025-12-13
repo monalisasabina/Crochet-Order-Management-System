@@ -9,6 +9,7 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
+    adapter: "sqlite",
     url: env("DATABASE_URL"),
   },
 });
