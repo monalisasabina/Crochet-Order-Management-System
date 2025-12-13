@@ -90,15 +90,15 @@ when installing Next.js from the beginning.
 ```
 i want to switch to backend, I just realized i can't do much on the frontend 
 after client-side routing. im conversant with Python (SQLAlchemy) for the backend. 
-Now I know models.py is used for models, seed.py is for sample data, and app.py 
-is deals with the API(FLASK). Now, i want you to;
+Now I know models.py is used for models, seed.py is for sample data, and app.py deals with the 
+API(FLASK). Now, i want you to;
  1. differentiate between using Next.js and Python .
  2. give me the basic structure of a next.js backend
  3. is there anything installed? 
  4. are we still using SQLAIchemy? 
- 5. what API is used? take me through step by step, avoid complex concepts
+ 5. what API is used?
+ take me through step by step, avoid complex concepts
 ```
-
 1. Differences
    Next.js;
    - uses JavaScript or TypeScript
@@ -114,21 +114,31 @@ is deals with the API(FLASK). Now, i want you to;
    - uses SQLAlchemy for database
    - routes are created in app.py
 
-2. The basic structure provide, taking into consideration I'll use the Prima as the database;
+2. The basic structure provide, taking into consideration I'll use the Prima;
 
 ```bash
    server/
         app/
            api/
-               dataA/
+               users/
                     route.js
-                dataB/
+                orders/
                      route.js
+
         prisma/
+             schema.prisma
+
         lib/
-        .env
-       
+            prisma.js   
+
+        .env   
 ```
+
+   - ```app/api``` it is where API logic goes
+   - ```lib/prisma``` Equivalent to SQLAIchemy initialization
+   - ```prisma/schema.prisma``` models go here
+   - ```.env``` database connection
+
 
 3. the only thing i installed is the Prisma database on the server directory using this command on the directory
 ```
@@ -137,5 +147,92 @@ is deals with the API(FLASK). Now, i want you to;
    npx prisma init
 ```
 
-4. No SQLAlchemy is Python based. Next.js uses Prisma as the database.
-5. 
+4. No,SQLAlchemy is Python based. Next.js uses Prisma.
+
+5. Use REST API, Example routes:
+   - GET /api/orders      ...list orders
+   - POST /api/orders     ...create order
+   - GET /api/orders/:id  ...single order
+
+## 4. Setting up the database
+
+prompt
+```text
+i want to start putting models in my Next.js backend and I'm using Prisma. 
+I'm aware they are done in the schema.prisma file. 
+There several things i want to know;
+1. there are different data types, how are they put there? 
+2. there are three types of model relationship, one to one, one to many and 
+many to many, how are done in Prisma? 
+3. is migration done after modelling? 
+I'm learning Next.js, don't put complex content
+```
+1. Modelling
+An example of a model;
+```
+model User {
+   id         Int
+   name       String
+   email
+   createdAt
+}
+```
+
+
+## Understanding Verification
+
+prompt
+```
+"I've created this Prisma model in schema.prisma:
+generator client { 
+   provider = "prisma-client" 
+   output   = "../generated/prisma" 
+   }
+
+datasource db {
+    provider = "sqlite"
+    url = env("DATABASE-URL") 
+    }
+
+model Order {
+    id           Int         @id @default(autoincrement()) 
+    Title        String 
+    imageUrl     String 
+    isCompleted  Boolean     @default(false) 
+    startDate    DateTime    @default(now()) 
+    endDate      DateTime
+
+    clientId     Int   //foreign key client       
+    Client      @relation(fields: [clientId], references: [id]) 
+    }
+
+    
+model Client {
+    id          Int        @id @default(autoincrement())
+    firstName   String 
+    lastName    String 
+    mobile      String
+    dateAdded   DateTime   @default(now())
+
+    orders      Order[]   //client can have many orders 
+    }
+  
+model Admin{
+    id          Int        @id @default(autoincrement()) 
+    firstName   String lastName    String 
+    userName    String email       String 
+    password    String 
+    }
+
+model Notification{
+    id          Int       @id @default(autoincrement())
+    isRead      @default(false) 
+    }
+
+Could you:
+- Verify if I've followed prisma modelling best practices?
+- Explain any improvements I should make?
+- Suggest what I should learn next?
+- Point out any Python SQLAIchemy habits that might be showing in my prisma code?"
+
+```
