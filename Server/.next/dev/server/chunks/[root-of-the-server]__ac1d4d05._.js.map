@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 40, "column": 0}, "map": {"version":3,"sources":["file:///home/monalisasabina/AI_CODE_CLASS/crochet-order-manager/Server/app/clients/route.js"],"sourcesContent":["import prisma from '../../lib/prisma.js';\n\n// GET ALL THE CLIENTS\nexport async function GET() {\n    try{\n        const clients = await prisma.client.findMany();\n        return Response.json(clients, { status: 200 });\n    }catch (error) {\n        return Response.json({ error: 'Failed to fetch clients' }, { status: 500 }); \n    }\n}"],"names":[],"mappings":";;;;;;;;;;AAGO,eAAe;IAClB,IAAG;QACC,MAAM,UAAU,MAAM,OAAO,MAAM,CAAC,QAAQ;QAC5C,OAAO,SAAS,IAAI,CAAC,SAAS;YAAE,QAAQ;QAAI;IAChD,EAAC,OAAO,OAAO;QACX,OAAO,SAAS,IAAI,CAAC;YAAE,OAAO;QAA0B,GAAG;YAAE,QAAQ;QAAI;IAC7E;AACJ"}}]
+}
