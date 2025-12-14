@@ -36,24 +36,40 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$ts__$5b$app
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 ;
 ;
+// HELPER FUNCTIONS------------------------------------
+// Get client ID from request URL
+function getClientId(request) {
+    const id = request.url.split("/").pop();
+    const clientId = Number(id);
+    return isNaN(clientId) ? null : clientId;
+}
+// Invalid client ID response
+function invalidResponse(request) {
+    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+        error: "Invalid client ID"
+    }, {
+        status: 400
+    });
+}
 async function GET(request) {
     try {
-        //Extracting client ID from the URL parameters 
-        const id = request.url.split("/").pop();
-        // Validating the extracted ID
-        if (!id || isNaN(Number(id))) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: "Invalid client ID"
-            }, {
-                status: 400
-            });
-        }
+        // Extracting client ID from the URL parameters
+        const clientId = getClientId(request);
+        // Validating client ID
+        if (!clientId) return invalidResponse();
         // Fetching the client by ID from the database
         const client = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].client.findUnique({
             where: {
-                id: Number(id)
+                id: Number(clientId)
             }
         });
+        if (!client) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Client not found'
+            }, {
+                status: 404
+            });
+        }
         // Returning response 
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(client, {
             status: 200
@@ -70,23 +86,16 @@ async function GET(request) {
 async function PATCH(request) {
     try {
         // Extracting client ID from the URL parameters
-        const id = request.url.split("/").pop();
-        if (!id || isNaN(Number(id))) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: 'Invalid client ID'
-            }, {
-                status: 400
-            });
-        }
-        // Extracting client data from the request body
-        const body = await request.json();
+        const clientId = getClientId(request);
+        // Validating client ID
+        if (!clientId) return invalidResponse();
+        // Extract updated client data from the request body
         const updatedClient = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].client.update({
             // Number() converts string to integer
             where: {
-                id: Number(id)
+                id: clientId
             },
-            // only updates provided field
-            data: body
+            data: await request.json()
         });
         console.log('Updated client:', updatedClient);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(updatedClient, {
@@ -103,22 +112,15 @@ async function PATCH(request) {
 }
 async function DELETE(request) {
     try {
-        // Extracting client ID from the URL parameters
-        const id = request.url.split("/").pop();
-        if (!id || isNaN(Number(id))) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                error: 'Invalid client ID'
-            }, {
-                status: 400
-            });
-        }
-        const deletedClient = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].client.delete({
+        const clientId = getClientId(request);
+        if (!clientId) return invalidResponse();
+        const removedClient = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].client.delete({
             where: {
-                id: Number(id)
+                id: clientId
             }
         });
-        console.log('Deleted client:', deletedClient);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(deletedClient, {
+        console.log('Deleted client:', removedClient);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(removedClient, {
             status: 200
         });
     } catch (error) {

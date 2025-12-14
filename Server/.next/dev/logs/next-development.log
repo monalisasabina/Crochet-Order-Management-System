@@ -1,3 +1,27 @@
-[00:00:01.193] Server  LOG      ✓ Ready in 829ms
-[00:03:48.506] Server  LOG     Updated client: {}
-[00:06:07.430] Server  LOG     Deleted client: {}
+[00:00:01.633] Server  LOG      ✓ Ready in 1075ms
+[00:00:11.937] Server  ERROR   Error deleting client: PrismaClientValidationError: 
+Invalid `prisma.client.deleteMany()` invocation:
+
+{
+  where: {
+    clientId: 32,
+    ~~~~~~~~
+?   AND?: ClientWhereInput | ClientWhereInput[],
+?   OR?: ClientWhereInput[],
+?   NOT?: ClientWhereInput | ClientWhereInput[],
+?   id?: IntFilter | Int,
+?   firstName?: StringFilter | String,
+?   lastName?: StringFilter | String,
+?   mobile?: StringFilter | String,
+?   dateAdded?: DateTimeFilter | DateTime,
+?   updatedAt?: DateTimeFilter | DateTime,
+?   orders?: OrderListRelationFilter
+  }
+}
+
+Unknown argument `clientId`. Available options are marked with ?.
+[00:00:59.498] Server  LOG     Deleted client: {}
+[00:02:14.191] Server  LOG     Created new client: {}
+[00:02:24.308] Server  LOG     Deleted client: {}
+[00:05:09.813] Server  LOG     Created new client: {}
+[00:05:15.971] Server  LOG     Deleted client: {}

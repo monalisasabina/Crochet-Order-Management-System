@@ -25,7 +25,7 @@ model Order {
   updatedAt    DateTime    @updatedAt
 
   clientId     Int   //foreign key
-  client       Client      @relation(fields: [clientId], references: [id])
+  client       Client      @relation(fields: [clientId], references: [id], onDelete: Restrict)
 }
 
 
