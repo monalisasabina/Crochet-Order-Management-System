@@ -47,7 +47,7 @@ model Admin{
   lastName    String
   userName    String
   email       String      @unique
-  password    String      @unique
+  password    String      
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 }

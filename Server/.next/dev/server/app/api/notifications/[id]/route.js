@@ -1,0 +1,11 @@
+var R=require("../../../../chunks/[turbopack]_runtime.js")("server/app/api/notifications/[id]/route.js")
+R.c("server/chunks/[externals]_node:crypto_2861b06e._.js")
+R.c("server/chunks/generated_prisma_runtime_client_d8a6b293.js")
+R.c("server/chunks/generated_prisma_query_compiler_bg_wasm-base64_46b9d492.js")
+R.c("server/chunks/generated_prisma_382083a4._.js")
+R.c("server/chunks/_b7f9825a._.js")
+R.c("server/chunks/[root-of-the-server]__bb1a94f5._.js")
+R.c("server/chunks/node_modules_b0a4b835._.js")
+R.c("server/chunks/_next-internal_server_app_api_notifications_[id]_route_actions_233733f6.js")
+R.m("[project]/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/app/api/notifications/[id]/route.js [app-route] (ecmascript)\" } [app-route] (ecmascript)")
+module.exports=R.m("[project]/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/app/api/notifications/[id]/route.js [app-route] (ecmascript)\" } [app-route] (ecmascript)").exports

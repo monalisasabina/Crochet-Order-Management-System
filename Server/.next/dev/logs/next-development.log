@@ -1,47 +1,7 @@
-[00:00:01.272] Server  LOG      ✓ Ready in 865ms
-[00:01:42.933] Server  WARN    Error: Route "/api/orders/[id]" used `params.id`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
-[00:01:43.207] Server  ERROR   Error updating order: PrismaClientValidationError: 
-Invalid `prisma.order.update()` invocation:
-
-{
-  where: {
-+   id: Int
-  },
-  data: {
-    title: "Crochet Sweater",
-    imageUrl: "https://www.allfreecrochet.com/thumbs/800x0/crochet-sweater-patterns-hero.jpg",
-    endDate: undefined,
-    clientId: 16,
-    isCompleted: true
-  }
-}
-
-Argument `id` is missing.
-[00:07:25.172] Server  LOG     Updated order: {}
-[00:11:37.276] Server  ERROR   Error updating order: ReferenceError: params is not defined
-[00:15:31.960] Server  WARN    Error: Route "/api/orders/[id]" used `params.id`. `params` is a Promise and must be unwrapped with `await` or `React.use()` before accessing its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
-[00:15:31.960] Server  LOG     Order ID to update: undefined
-[00:15:32.199] Server  ERROR   Error updating order: PrismaClientValidationError: 
-Invalid `prisma.order.update()` invocation:
-
-{
-  where: {
-+   id: Int
-  },
-  data: {
-    title: "Crochet Sweater",
-    imageUrl: "https://www.allfreecrochet.com/thumbs/800x0/crochet-sweater-patterns-hero.jpg",
-    endDate: undefined,
-    clientId: 16,
-    isCompleted: false
-  }
-}
-
-Argument `id` is missing.
-[00:16:04.592] Server  LOG     Order ID to update: "33"
-[00:16:04.635] Server  LOG     Updated order: {}
-[00:27:26.966] Server  LOG     Order ID to update: "33"
-[00:27:26.986] Server  LOG     Updated order: {}
-[00:30:48.673] Server  LOG     Order ID to update: 33
-[00:30:48.712] Server  LOG     Updated order: {}
-[00:36:43.958] Server  LOG     Deleted order: {}
+[00:00:01.205] Server  LOG      ✓ Ready in 757ms
+[00:01:51.817] Server  LOG     Fetched notifications: [{...},{...},{...},{...},{...},{...},{...},{...},{...},{...},{...},{...},{...},{...},{...}]
+[00:14:25.183] Server  LOG     Created new notification: {}
+[00:28:08.523] Server  LOG     Notification ID to update: 31
+[00:28:08.556] Server  LOG     Updated notification: {}
+[00:29:11.686] Server  LOG     Notification ID to delete: 18
+[00:29:11.719] Server  LOG     Deleted notification with ID: 18
