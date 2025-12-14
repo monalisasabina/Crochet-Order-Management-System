@@ -254,6 +254,7 @@ A user can have many posts but a post can have one user.
    
 
 ## 5. Understanding Verification
+I wasn't to sure of the models so i had to find out if i have done the right thing.
 
 prompt
 ```
@@ -457,8 +458,31 @@ Comments sometimes inline, sometimes above, extra blank lines and mixed quote st
 |Current|Better|
 |:------:|:-----:|
 |id|clientID|
-|body|updateData|
+|body|updatedData|
 |client|clientRecord|
 |deletedClient|removedClient|
+
+3. The code was broken down to into helpers;
+```javascript
+function getClientId(request) {
+   const id = request.url.split("/").pop();
+   const clientId = Number(id);
+
+   
+    if (!id || Number.isNaN(clientId)) {
+        return null;
+    }
+
+    return clientId;
+}
+
+function invalidIdResponse() {
+    return NextResponse.json(
+        { error: "Invalid client ID" },
+        { status: 400 }
+    );
+}
+```
+The full code is in ```Server/app/api/clients/[id]/route.js```
 
 
