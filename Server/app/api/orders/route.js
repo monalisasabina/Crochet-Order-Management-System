@@ -52,7 +52,11 @@ export async function POST(request) {
         const { title, imageUrl, endDate, clientId } = await request.json();
 
         const newOrder = await prisma.order.create({
-            data: {title, imageUrl, endDate, clientId},
+            data: {
+                title, 
+                imageUrl, 
+                endDate: new Date(endDate), 
+                clientId: parseInt(clientId)},
         });
 
         console.log('Created new order:', newOrder);

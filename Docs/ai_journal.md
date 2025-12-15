@@ -486,3 +486,84 @@ function invalidIdResponse() {
 The full code is in ```Server/app/api/clients/[id]/route.js```
 
 
+## 7. Error Message Translation
+
+Prompt
+```text
+
+I need help understanding this error message from my Next.js application.
+Here's the complete error message and stack trace:
+[ order.startDate.toLocaleDateString is not a function at page.js:113:61 at Array.map (<anonymous>) at Orders (page.js:98:33) at Object.react_stack_bottom_frame (react-dom-client.development.js:28016:20) at renderWithHooks (react-dom-client.development.js:7982:22) at updateFunctionComponent (react-dom-client.development.js:10499:19) at beginWork (react-dom-client.development.js:12134:18) at runWithFiberInDEV (react-dom-client.development.js:984:30) at performUnitOfWork (react-dom-client.development.js:18995:22) at workLoopSync (react-dom-client.development.js:18823:41) at renderRootSync (react-dom-client.development.js:18804:11) at performWorkOnRoot (react-dom-client.development.js:17912:35) at performWorkOnRootViaSchedulerTask (react-dom-client.development.js:20382:7) at MessagePort.performWorkUntilDeadline (scheduler.development.js:45:48)    ]
+My application context:
+- This happened when I was trying to [ convert the date format]
+- I'm using [Next js, javascript]
+Could you:
+- Explain what this error means in simple, non-technical terms
+- Identify the most relevant lines in the stack trace (which ones actually point to my code)
+- List 2-3 of the most likely causes based on this type of error
+- Suggest what specific information I should look for in my code
+- Provide a step-by-step debugging approach
+```
+
+Summary
+1. Error Meaning
+The error says the whatever ```order.startDate``` is at render time, it's not a Javascript object. Only Date objects have the ```toLocaleDateString``` method.
+
+2. Most relevant lines
+- ```page.js:113:61:``` is the exact line where the componene tried to call ```order.startDate.toLocaleDateString(...)```
+
+- ```page.js:98:33:``` is where I rendered the list of orders.
+
+- ```Array.map``` confirms it happened during my map over orders.
+
+3. Likely Causes
+- ```order.StartDate``` is an ISO string from my API, not a Date object. JSON serialization does this
+
+- ```order.startDate``` is ```null``` or ```underfined```  for some record, so there’s no method to call.
+
+- The field name is different than you expect e.g ```start_date``` vs ```startDate``` or the object is nested causing me to read the wrong value.
+
+4. What I should look for in the code
+- log the value and type before formatting:
+ ```javascript
+ console.log('startDate value:', order.startDate, 'type:', typeof order.startDate);
+ ```
+- Check the API response shape, are dates strings?
+- Find every place I called ```toLocaleDateString``` directly on a field and confirm it's wrapped with ```newDate```
+
+5. Step for debugging
+- Added a console check where the error occured.
+```javascript
+// Debugging code
+orders.map(order => {
+  console.log('startDate:', order.startDate, typeof order.startDate);
+  // temporarily avoid the crash
+  return <div key={order.id}>{String(order.startDate)}</div>;
+});
+```
+Results:
+The ISO timestamps produced e.g ```2025-12-15T18:21:33.924Z``` were not user-friendly
+
+- A time formatter code was introduced;
+```javascript
+const formatDate = (input) => {
+  if (!input) return '—';
+  const d = new Date(input);
+  return Number.isNaN(d.getTime())
+    ? 'Invalid date'
+    : d.toLocaleDateString('en-KE', { year: 'numeric', month: 'short', day: 'numeric' });
+};
+```
+
+So I put the function in the jsx:
+```jsx
+<p><strong>Start Date:</strong> {formatDate(order.startDate)}</p>
+<p><strong>End Date:</strong> {formatDate(order.endDate)}</p>
+```
+The date output:
+```text
+31 Dec 2025
+```
+👍
+
+

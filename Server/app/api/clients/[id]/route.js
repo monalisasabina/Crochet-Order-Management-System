@@ -1,6 +1,21 @@
 import prisma from "../../../../lib/prisma";
 import {NextResponse} from 'next/server';
 
+// CORS HEADERS
+const corsHeaders ={
+    'Access-Control-Allow-Origin': 'http://localhost:4000',
+    'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+}
+
+//Preflight request handler
+export async function OPTIONS() {
+    return new NextResponse(null, {
+        status: 200,
+        headers: corsHeaders
+    });
+}
+
 
 // HELPER FUNCTIONS------------------------------------
 // Get client ID from request URL
@@ -16,7 +31,7 @@ function getClientId(request){
 function invalidResponse(request){
     return NextResponse.json(
         { error: "Invalid client ID" },
-        { status: 400 }
+        { status: 400, header: corsHeaders }
     )
 }
 
@@ -39,15 +54,15 @@ export async function GET(request) {
     if (!client) {
         return NextResponse.json(
             { error: 'Client not found' },
-            { status: 404 }
+            { status: 404, header: corsHeaders }
         );
     }
 
     // Returning response 
-    return NextResponse.json(client, { status: 200 });
+    return NextResponse.json(client, { status: 200, header: corsHeaders });
     } catch (error) {
         console.error('Error fetching client by ID:', error);
-        return NextResponse.json({ error: 'Failed to fetch client' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to fetch client' }, { status: 500, header: corsHeaders });
     }
 
 }
@@ -70,10 +85,10 @@ export async function PATCH(request) {
         });
         console.log('Updated client:', updatedClient);
 
-        return NextResponse.json(updatedClient, { status: 200 });
+        return NextResponse.json(updatedClient, { status: 200, header: corsHeaders });
         } catch (error) {
         console.error('Error updating client:', error);
-        return NextResponse.json({ error: 'Failed to update client' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to update client' }, { status: 500, header: corsHeaders });
     }
 }
 
@@ -90,9 +105,9 @@ export async function DELETE(request) {
         });
         console.log('Deleted client:', removedClient);
 
-        return NextResponse.json(removedClient, { status: 200 });
+        return NextResponse.json(removedClient, { status: 200, header: corsHeaders });
     } catch (error) {
         console.error('Error deleting client:', error);
-        return NextResponse.json({ error: 'Failed to delete client' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to delete client' }, { status: 500, header: corsHeaders });
     }
 }   

@@ -1,6 +1,21 @@
 import { NextResponse } from 'next/server';
 import prisma from '../../../../lib/prisma';
 
+// CORS HEADERS
+const corsHeaders ={
+    'Access-Control-Allow-Origin': 'http://localhost:4000',
+    'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+}
+
+//Preflight request handler
+export async function OPTIONS() {
+    return new NextResponse(null, {
+        status: 200,
+        headers: corsHeaders
+    });
+}
+
 
 // HELPER FUNCTIONS------------------------------------
 // Get Notification ID from request URL
@@ -15,7 +30,7 @@ function getNotificationId(request){
 function invalidResponse(request){
     return NextResponse.json(
         { error: "Invalid notification ID" },
-        { status: 400 }
+        { status: 400, header: corsHeaders }
     )
 }
 
@@ -38,7 +53,7 @@ export async function GET(request) {
     if (!notification) {
         return NextResponse.json(
             { error: 'Notification not found' },
-            { status: 404 }
+            { status: 404, header: corsHeaders }
         );
     }
 
@@ -46,7 +61,7 @@ export async function GET(request) {
     return NextResponse.json(notification, { status: 200 });
     } catch (error) {
         console.error('Error fetching notification by ID:', error);
-        return NextResponse.json({ error: 'Failed to fetch notification' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to fetch notification' }, { status: 500, header: corsHeaders });
     }
 }
 
@@ -75,11 +90,11 @@ export async function PATCH(request) {
 
         console.log('Updated notification:', updatedNotification);
 
-        return NextResponse.json(updatedNotification, { status: 200 });
+        return NextResponse.json(updatedNotification, { status: 200, header: corsHeaders });
 
     } catch (error) {
         console.error('Error updating notification:', error);
-        return NextResponse.json({ error: 'Failed to update notification' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to update notification' }, { status: 500, header: corsHeaders });
     }               
 
 }
@@ -103,12 +118,12 @@ export async function DELETE(request) {
 
         return NextResponse.json(
             { message: 'Notification deleted successfully' },
-            { status: 200 }
+            { status: 200, header: corsHeaders }
         );
 
     } catch (error) {
         console.error('Error deleting notification:', error);
-        return NextResponse.json({ error: 'Failed to delete notification' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to delete notification' }, { status: 500, header: corsHeaders });
     }               
 
 }

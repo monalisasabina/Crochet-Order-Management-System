@@ -56,6 +56,19 @@ export default function Orders(){
         return true; // for "all" filter
     })
 
+    // Date Format
+    const formatDate = (input) => {
+        if (!input) return '_';
+        const date = new Date(input);
+        return Number.isNaN(date.getTime())
+           ?'Invalid date'
+           :date.toLocaleDateString('en-KE', {
+            year: 'numeric',
+            month:'short',
+            day:'numeric',
+           });
+    }
+
 
     return(
         <div className='order-cont'>
@@ -64,6 +77,17 @@ export default function Orders(){
             <div className='order-header'>
                 <h1>Orders Page</h1>
             </div>
+
+            {/* For debugging */}
+            {/* {orders.map(order => {
+                console.log('startDate:', order.startDate, typeof order.startDate);
+                return(
+                    <div key={order.id}>
+                        {String(order.startDate)}
+                    </div>
+                )
+              })
+            } */}
 
             {/* Filter Completed Orders */}
             <div className='order-filter'>
@@ -110,8 +134,8 @@ export default function Orders(){
                         <div className='order-details'>
                             <h2>{order.title}</h2>
                             <p>Client: {order.client.firstName} {order.client.lastName}</p>
-                            <p>Start Date: {order.startDate}</p>
-                            <p>End Date: {order.endDate}</p>
+                            <p>Start Date: {formatDate(order.startDate)}</p>
+                            <p>End Date: {formatDate(order.endDate)}</p>
 
                             {/* status toggle */}
                              <OrderStatus 

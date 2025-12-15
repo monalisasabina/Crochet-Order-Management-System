@@ -84,8 +84,8 @@ async function POST(request) {
             data: {
                 title,
                 imageUrl,
-                endDate,
-                clientId
+                endDate: new Date(endDate),
+                clientId: parseInt(clientId)
             }
         });
         console.log('Created new order:', newOrder);

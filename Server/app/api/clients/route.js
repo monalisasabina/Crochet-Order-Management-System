@@ -1,15 +1,30 @@
 import prisma from '../../../lib/prisma';
 import {NextResponse} from 'next/server';
 
+// CORS HEADERS
+const corsHeaders ={
+    'Access-Control-Allow-Origin': 'http://localhost:4000',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+}
+
+//Preflight request handler
+export async function OPTIONS() {
+    return new NextResponse(null, {
+        status: 200,
+        headers: corsHeaders
+    });
+}
+
 // GET ALL THE CLIENTS
 export async function GET() {
     try{
         const clients = await prisma.client.findMany();
         console.log('Fetched clients:', clients);
-        return NextResponse.json(clients, { status: 200 });
+        return NextResponse.json(clients, { status: 200, headers: corsHeaders});
     }catch (error) {
         console.error('Error fetching clients:', error);
-        return NextResponse.json({ error: 'Failed to fetch clients' }, { status: 500 }); 
+        return NextResponse.json({ error: 'Failed to fetch clients' }, { status: 500, headers: corsHeaders}); 
     }
 }
 
@@ -25,11 +40,11 @@ export async function POST(request) {
 
         console.log('Created new client:', newClient);
 
-        return NextResponse.json(newClient, { status: 201 });
+        return NextResponse.json(newClient, { status: 201, headers: corsHeaders });
 
     } catch (error) {
         console.error('Error creating client:', error);
-        return NextResponse.json({ error: 'Failed to create client' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to create client' }, { status: 500, headers: corsHeaders });
     }
 }
 
