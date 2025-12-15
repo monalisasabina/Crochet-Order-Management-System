@@ -1,6 +1,23 @@
 import { NextResponse } from 'next/server';
 import prisma from '../../../../lib/prisma';
 
+
+
+// CORS HEADERS
+const corsHeaders ={
+    'Access-Control-Allow-Origin': 'http://localhost:4000',
+    'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+}
+
+//Preflight request handler
+export async function OPTIONS() {
+    return new NextResponse(null, {
+        status: 200,
+        headers: corsHeaders
+    });
+}
+
 // HELPER FUNCTIONS------------------------------------
 // Get order ID from request URL
 function getOrderId(request){
@@ -15,7 +32,7 @@ function getOrderId(request){
 function invalidResponse(request){
     return NextResponse.json(
         { error: "Invalid order ID" },
-        { status: 400 }
+        { status: 400, headers: corsHeaders }
     )
 }
 
@@ -38,15 +55,15 @@ export async function GET(request) {
     if (!order) {
         return NextResponse.json(
             { error: 'Order not found' },
-            { status: 404 }
+            { status: 404, headers: corsHeaders }
         );
     }
 
     // Returning response 
-    return NextResponse.json(order, { status: 200 });
+    return NextResponse.json(order, { status: 200, headers: corsHeaders });
     } catch (error) {
         console.error('Error fetching order by ID:', error);
-        return NextResponse.json({ error: 'Failed to fetch order' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to fetch order' }, { status: 500, headers: corsHeaders });
     }
 
 }
@@ -75,10 +92,10 @@ export async function PATCH(request) {
                 
         console.log('Updated order:', updatedOrder);
 
-        return NextResponse.json(updatedOrder, { status: 200 });
+        return NextResponse.json(updatedOrder, { status: 200, headers: corsHeaders });
         } catch (error) {
         console.error('Error updating order:', error);
-        return NextResponse.json({ error: 'Failed to update order' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to update order' }, { status: 500, headers: corsHeaders });
     }
 }
 
@@ -96,9 +113,9 @@ export async function DELETE(request) {
 
         console.log('Deleted order:', deletedOrder);
 
-        return NextResponse.json(deletedOrder, { status: 200 });
+        return NextResponse.json(deletedOrder, { status: 200, headers: corsHeaders });
     } catch (error) {
         console.error('Error deleting order:', error);
-        return NextResponse.json({ error: 'Failed to delete order' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to delete order' }, { status: 500, headers: corsHeaders });
     }
 }   

@@ -1,6 +1,8 @@
-import {prisma} from '../lib/prisma';
+import prisma from '../lib/prisma';
 import bcrypt from 'bcryptjs';
  
+// seed command: npx prisma db seed
+
 // main function
 async function main() {
 

@@ -1,11 +1,46 @@
- import Link from 'next/link';
+// use client tells next to run that file in the browser
+// lets you use hooks like useState and useEffect
+'use client';
+
+import Link from 'next/link';
+import Image from 'next/image';
+import "./NavBar.css"
+import logo from './IMAGES/Logo design featurin.png'
+import { usePathname } from 'next/navigation';
+
  
  export default function Nav() {
+ 
+    // pathname tells us which page the user is on 
+    const pathname = usePathname();
+
     return(
-        <nav className="flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-800">
-            <Link href="/" className="text-blue-500 hover:underline">Home</Link>
-            <Link href="/about" className="text-blue-500 hover:underline">About</Link>
-            <Link href="/orders" className="text-blue-500 hover:underline">Orders</Link>
+        <nav className="nav-cont">
+
+            {/* logo */}
+            <Link
+                 href="/"
+                 className='nav-logo'
+                 >
+                 <Image 
+                      src={logo} 
+                      alt="crochet Logo"
+                    width={120} 
+                      height={120}/>
+
+            </Link>
+ 
+            <Link 
+                 href="/"
+                 className={`nav-link ${pathname === '/' ? 'active' : ''}`} 
+                 >DASHBOARD
+            </Link>
+
+            <Link 
+                  href="/orders"
+                  className={`nav-link ${pathname === '/orders' ? 'active' : ''}`}
+                  > ORDERS
+            </Link>
         </nav>
     )
-}
+}  

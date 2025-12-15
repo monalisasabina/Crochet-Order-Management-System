@@ -1,0 +1,46 @@
+/* Container for the whole sidebar */
+.nav-cont {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;              /* full screen height */
+  width: 15rem;               /* fixed width */
+  background-color: #f3b6c2;  /* sidebar background */
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+/* Default link style */
+.nav-link {
+  color: white;               /* default text color */
+  font-weight: bold;
+  text-decoration: none;
+  margin-bottom: 1.5rem;      /* spacing between links */
+  padding: 0.5rem 0.75rem;    /* clickable area around text */
+  border-radius: 4px;         /* rounded corners */
+  display: block;
+  font-size: 1.35rem;         /* larger text */
+}
+
+/* Hover effect */
+.nav-link:hover {
+  color: #d6536d;             /* highlight text */
+}
+
+/* Active link style */
+.nav-link.active {
+  color: #e8748b;             /* highlight text */
+  background-color: rgba(255, 255, 255, 0.2); /* subtle background */
+}
+
+/* Logo styling */
+.nav-logo {
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-logo img {
+  width: 170px;
+  height: auto;
+  object-fit: contain;
+}

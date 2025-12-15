@@ -29,6 +29,8 @@ __turbopack_context__.s([
     ()=>DELETE,
     "GET",
     ()=>GET,
+    "OPTIONS",
+    ()=>OPTIONS,
     "PATCH",
     ()=>PATCH
 ]);
@@ -36,6 +38,18 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$serv
 var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/prisma.ts [app-route] (ecmascript)");
 ;
 ;
+// CORS HEADERS
+const corsHeaders = {
+    'Access-Control-Allow-Origin': 'http://localhost:4000',
+    'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+};
+async function OPTIONS() {
+    return new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"](null, {
+        status: 200,
+        headers: corsHeaders
+    });
+}
 // HELPER FUNCTIONS------------------------------------
 // Get order ID from request URL
 function getOrderId(request) {
@@ -48,7 +62,8 @@ function invalidResponse(request) {
     return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
         error: "Invalid order ID"
     }, {
-        status: 400
+        status: 400,
+        headers: corsHeaders
     });
 }
 async function GET(request) {
@@ -67,19 +82,22 @@ async function GET(request) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: 'Order not found'
             }, {
-                status: 404
+                status: 404,
+                headers: corsHeaders
             });
         }
         // Returning response 
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(order, {
-            status: 200
+            status: 200,
+            headers: corsHeaders
         });
     } catch (error) {
         console.error('Error fetching order by ID:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             error: 'Failed to fetch order'
         }, {
-            status: 500
+            status: 500,
+            headers: corsHeaders
         });
     }
 }
@@ -107,14 +125,16 @@ async function PATCH(request) {
         });
         console.log('Updated order:', updatedOrder);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(updatedOrder, {
-            status: 200
+            status: 200,
+            headers: corsHeaders
         });
     } catch (error) {
         console.error('Error updating order:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             error: 'Failed to update order'
         }, {
-            status: 500
+            status: 500,
+            headers: corsHeaders
         });
     }
 }
@@ -130,14 +150,16 @@ async function DELETE(request) {
         });
         console.log('Deleted order:', deletedOrder);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(deletedOrder, {
-            status: 200
+            status: 200,
+            headers: corsHeaders
         });
     } catch (error) {
         console.error('Error deleting order:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             error: 'Failed to delete order'
         }, {
-            status: 500
+            status: 500,
+            headers: corsHeaders
         });
     }
 }

@@ -27,6 +27,8 @@ const __TURBOPACK__default__export__ = prisma;
 __turbopack_context__.s([
     "GET",
     ()=>GET,
+    "OPTIONS",
+    ()=>OPTIONS,
     "POST",
     ()=>POST
 ]);
@@ -34,19 +36,43 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$ts__$5b$app
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 ;
 ;
+// CORS HEADERS
+const corsHeaders = {
+    'Access-Control-Allow-Origin': 'http://localhost:4000',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+};
+async function OPTIONS() {
+    return new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"](null, {
+        status: 200,
+        headers: corsHeaders
+    });
+}
 async function GET() {
     try {
-        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany();
+        const orders = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].order.findMany({
+            include: {
+                client: {
+                    select: {
+                        id: true,
+                        firstName: true,
+                        lastName: true
+                    }
+                }
+            }
+        });
         console.log('Fetched orders:', orders);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(orders, {
-            status: 200
+            status: 200,
+            headers: corsHeaders
         });
     } catch (error) {
         console.error('Error fetching orders:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             error: 'Failed to fetch orders'
         }, {
-            status: 500
+            status: 500,
+            headers: corsHeaders
         });
     }
 }
@@ -64,14 +90,16 @@ async function POST(request) {
         });
         console.log('Created new order:', newOrder);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(newOrder, {
-            status: 201
+            status: 201,
+            headers: corsHeaders
         });
     } catch (error) {
         console.error('Error creating order:', error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             error: 'Failed to create order'
         }, {
-            status: 500
+            status: 500,
+            headers: corsHeaders
         });
     }
 }

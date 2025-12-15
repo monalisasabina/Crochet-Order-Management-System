@@ -1,4 +1,5 @@
 {
-  "/api/notifications/[id]/route": "app/api/notifications/[id]/route.js",
-  "/api/notifications/route": "app/api/notifications/route.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/orders/[id]/route": "app/api/orders/[id]/route.js",
+  "/api/orders/route": "app/api/orders/route.js"
 }
