@@ -33,6 +33,14 @@ This system is designed to be scalable, easy to maintain, and user-friendly.
 
 ---
 
+## 📄 Documentation
+You can find the full project documentation here:  
+[Project Documentation (Google Docs)](https://docs.google.com/document/d/1NWekc9mpJOCk_WtLTjMN51FIVkmKX_-Zc2OB-KG2O98/edit?usp=sharing)
+
+
+---
+
+
 ## Features
 
 - **Track Clients Orders:** Monitor the status of each client order from creation to completion.
