@@ -47,7 +47,6 @@ export default function Orders(){
         )
     }
 
-    
   // function to delete order
     const handleDelete = async (orderId, orderTitle) => {
         // Show confirmation dialog
@@ -74,7 +73,7 @@ export default function Orders(){
             console.error("Error deleting order:", error)
             alert("Failed to delete order. Please try again.")
         }
-    }
+    };
 
 
     // filter orders based on completion status
@@ -191,8 +190,6 @@ export default function Orders(){
                     </div>
                 ))}
             </div>
-
-
         </div>
     )
-}
+};

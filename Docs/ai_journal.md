@@ -156,7 +156,7 @@ API(FLASK). Now, i want you to;
    - POST /api/orders     ...create order
    - GET /api/orders/:id  ...single order
 
-## 4. Setting up the database
+## 4. Setting up the models for the database
 
 prompt
 ```text
@@ -351,6 +351,7 @@ Language/Framework: Next.js Team coding standards: [e.g., camelCase for variable
 [CODE PASTED]
 import prisma from "../../../../lib/prisma"; 
 import {NextResponse} from 'next/server';
+
 // FETCHING A SINGLE CLIENT BY ID 
 export async function GET(request) {
 try{

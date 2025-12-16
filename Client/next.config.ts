@@ -3,11 +3,30 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
 
-   images: {
-    domains: ["images.unsplash.com", "example.com", "daisycottagedesigns.net", "www.allfreecrochet.com"], // allow Unsplash images and example.com
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "example.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "daisycottagedesigns.net",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.allfreecrochet.com",
+        pathname: "/**",
+      },
+    ],
   },
-
- 
 };
 
 export default nextConfig;
