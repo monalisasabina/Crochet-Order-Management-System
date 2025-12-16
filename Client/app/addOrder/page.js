@@ -2,6 +2,7 @@
 import './addOrder.css'
 
 import { useState } from "react";
+import Image from 'next/image'
 
 export default function AddOrderPage() {
 
@@ -28,10 +29,25 @@ export default function AddOrderPage() {
 
     if (res.ok) {
       const data = await res.json();
-      setPreview(data); // show preview of what was added
+      console.log(data)
+      setPreview(data.order); // show preview of what was added
       setFormData({ title: "", imageUrl: "", endDate: "", clientId: "" });
     }
   };
+
+  
+    // Date Format
+    const formatDate = (input) => {
+        if (!input) return '_';
+        const date = new Date(input);
+        return Number.isNaN(date.getTime())
+           ?'Invalid date'
+           :date.toLocaleDateString('en-KE', {
+            year: 'numeric',
+            month:'short',
+            day:'numeric',
+           });
+    }
 
   return (
     <div className="container">
@@ -39,6 +55,7 @@ export default function AddOrderPage() {
       <form onSubmit={handleSubmit}>
         <label>Title</label>
         <input
+        type='text'
           name="title"
           value={formData.title}
           onChange={handleChange}
@@ -47,6 +64,7 @@ export default function AddOrderPage() {
 
         <label>Image URL</label>
         <input
+        type='url'
           name="imageUrl"
           value={formData.imageUrl}
           onChange={handleChange}
@@ -64,6 +82,7 @@ export default function AddOrderPage() {
 
         <label>Client ID</label>
         <input
+        type='text'
           name="clientId"
           value={formData.clientId}
           onChange={handleChange}
@@ -76,9 +95,20 @@ export default function AddOrderPage() {
       {preview && (
         <div className="preview">
           <h2>Order Preview</h2>
+
           <p><strong>Title:</strong> {preview.title}</p>
-          <img src={preview.imageUrl} alt={preview.title} width="200" />
-          <p><strong>End Date:</strong> {new Date(preview.endDate).toLocaleDateString()}</p>
+
+          {preview.imageUrl ? (    
+             <Image 
+               src={preview.imageUrl} 
+               alt={preview.title} 
+               width={200}
+               height={200}
+          /> 
+           ) : (<p>No image provided</p>)}
+     
+          <p><strong>End Date:</strong> {formatDate(preview.endDate)}</p>
+
           <p><strong>Client ID:</strong> {preview.clientId}</p>
         </div>
       )}

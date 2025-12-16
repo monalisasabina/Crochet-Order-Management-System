@@ -8,6 +8,7 @@ export default function DashboardPage() {
   const [notifications, setNotifications] = useState([]);
   const [orders, setOrders] = useState([]);
   const [clients, setClients] = useState([]);
+  const [totalUnreadCount, setTotalUnreadCount] = useState(0)
 
    useEffect(() => {
     // Fetch unread notifications
@@ -15,7 +16,15 @@ export default function DashboardPage() {
       const res = await fetch("http://localhost:3000/api/notifications");
       if (res.ok) {
         const data = await res.json();
-        setNotifications(data.filter(n => !n.isRead)); // only unread
+        
+        // Fetching unread notifications
+        const unreadNotifications = data.filter(n => !n.isRead);
+
+        // Counting unread notifications
+        setTotalUnreadCount(unreadNotifications.length)
+
+        // Only 5 notifications for display
+        setNotifications(unreadNotifications.slice(0,5));
       }
     };
 
@@ -49,7 +58,7 @@ export default function DashboardPage() {
     
     // confirmation alert
     const confirmMarkRead = window.confirm(
-      "Are you sure you want to mark this notifiaction as read?"
+      "Are you sure you want to mark this notification as read?"
     );
     if(!confirmMarkRead){
       return;
@@ -61,6 +70,7 @@ export default function DashboardPage() {
       body: JSON.stringify({ isRead: true }),
     });
     setNotifications(notifications.filter(n => n.id !== id));
+    setTotalUnreadCount(prev => prev -1);
   };
 
 
@@ -73,7 +83,19 @@ export default function DashboardPage() {
 
       {/* Notifications */}
       <div className="notifications">
-        <h2>Notifications</h2>
+
+        {/* Notification header */}
+        <div className="notification-header">
+            <h2>
+                <span className="bell-icon">🔔</span>
+                 Notifications
+                  {totalUnreadCount > 0 && (
+                <span className="unread-badge">{totalUnreadCount}</span>
+                )}
+            </h2>
+        </div>
+
+        {/* Notification list */}
         {notifications.length === 0 ? (
           <p className="empty-message">No new notifications</p>
         ) : (

@@ -40,7 +40,19 @@ export async function POST(request) {
 
         console.log('Created new client:', newClient);
 
-        return NextResponse.json(newClient, { status: 201, headers: corsHeaders });
+        // Creating notification
+        const clientNotification = await prisma.notification.create({
+            data: {
+                message: `Client: "${newClient.firstName}" "${newClient.lastName}" created.`,
+                isRead: false,
+            }
+        });
+        console.log("Created notification:", clientNotification)
+
+        return NextResponse.json(
+                    {client: newClient, notification: clientNotification}, 
+                    { status: 201, headers: corsHeaders });
+
 
     } catch (error) {
         console.error('Error creating client:', error);

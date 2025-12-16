@@ -30,7 +30,7 @@ export default function AddClientPage() {
 
     if (res.ok) {
       const data = await res.json()
-      setPreview(data);
+      setPreview(data.client);
       setMessage("Client added successfully!");
       setFormData({ firstName: "", lastName: "", mobile: "" });
     } else {

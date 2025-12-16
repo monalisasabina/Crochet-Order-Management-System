@@ -8,7 +8,7 @@ Prompt
 ```text
 I want to build a Next.js application.
 I'm conversant with React.js for frontend and Python for Backend. 
-So i have the following questions for you?
+So I have the following questions for you?
  1. what are the systems requirements? 
  2. Is Next.js installed the same way as React.js? 
  3. I'm thinking of structuring the project root folder 
@@ -48,7 +48,7 @@ Response summary
 ## 2. Client-Side-Routing (11/12/2025)
 Prompt
 ```text
-For the frontend, in react.js there was the app.js folder the 
+For the frontend, in react.js there was the app.js folder that
 dealt with the routing and the whole application itself. I preferred 
 having the routes defined on its own folder, routes.js. The Next.js
 documentation is puzzling me about client side routing, so;
@@ -90,16 +90,16 @@ when installing Next.js from the beginning.
 ## 3. Setting up the Backend
 
 ```
-i want to switch to backend, I just realized i can't do much on the frontend 
-after client-side routing. im conversant with Python (SQLAlchemy) for the backend. 
+I want to switch to backend, I just realized I can't do much on the frontend 
+after client-side routing. I'm conversant with Python (SQLAlchemy) for the backend. 
 Now I know models.py is used for models, seed.py is for sample data, and app.py deals with the 
-API(FLASK). Now, i want you to;
- 1. differentiate between using Next.js and Python .
- 2. give me the basic structure of a next.js backend
- 3. is there anything installed? 
- 4. are we still using SQLAIchemy? 
- 5. what API is used?
- take me through step by step, avoid complex concepts
+API(FLASK). Now, I want you to;
+ 1. Differentiate between using Next.js and Python .
+ 2. Give me the basic structure of a next.js backend
+ 3. Is there anything installed? 
+ 4. Are we still using SQLAIchemy? 
+ 5. What API is used?
+ Take me through step by step, avoid complex concepts.
 ```
 1. Differences
    Next.js;
@@ -160,12 +160,12 @@ API(FLASK). Now, i want you to;
 
 prompt
 ```text
-i want to start putting models in my Next.js backend and I'm using Prisma. 
+I want to start putting models in my Next.js backend and I'm using Prisma. 
 I'm aware they are done in the schema.prisma file. 
-There several things i want to know;
-1. there are different data types, how are they put there? 
-2. there are three types of model relationship, one to one, one to many and many to many, how are done in Prisma? 
-3. is migration done after modelling? 
+There several things I want to know;
+1. There are different data types, how are they put there? 
+2. There are three types of model relationship, one to one, one to many and many to many, how are done in Prisma? 
+3. Is migration done after modelling? 
 I'm learning Next.js, don't put complex content
 ```
 1. Modelling
@@ -254,7 +254,7 @@ A user can have many posts but a post can have one user.
    
 
 ## 5. Understanding Verification
-I wasn't to sure of the models so i had to find out if i have done the right thing.
+I wasn't to sure of the models so I had to find out if I have done the right thing.
 
 prompt
 ```
@@ -491,10 +491,11 @@ The full code is in ```Server/app/api/clients/[id]/route.js```
 
 Prompt
 ```text
-
 I need help understanding this error message from my Next.js application.
 Here's the complete error message and stack trace:
-[ order.startDate.toLocaleDateString is not a function at page.js:113:61 at Array.map (<anonymous>) at Orders (page.js:98:33) at Object.react_stack_bottom_frame (react-dom-client.development.js:28016:20) at renderWithHooks (react-dom-client.development.js:7982:22) at updateFunctionComponent (react-dom-client.development.js:10499:19) at beginWork (react-dom-client.development.js:12134:18) at runWithFiberInDEV (react-dom-client.development.js:984:30) at performUnitOfWork (react-dom-client.development.js:18995:22) at workLoopSync (react-dom-client.development.js:18823:41) at renderRootSync (react-dom-client.development.js:18804:11) at performWorkOnRoot (react-dom-client.development.js:17912:35) at performWorkOnRootViaSchedulerTask (react-dom-client.development.js:20382:7) at MessagePort.performWorkUntilDeadline (scheduler.development.js:45:48)    ]
+
+[ order.startDate.toLocaleDateString is not a function at page.js:113:61 at Array.map (<anonymous>) at Orders (page.js:98:33) at Object.react_stack_bottom_frame (react-dom-client.development.js:28016:20) at renderWithHooks (react-dom-client.development.js:7982:22) at updateFunctionComponent (react-dom-client.development.js:10499:19) at beginWork (react-dom-client.development.js:12134:18) at runWithFiberInDEV (react-dom-client.development.js:984:30) at performUnitOfWork (react-dom-client.development.js:18995:22) at workLoopSync (react-dom-client.development.js:18823:41) at renderRootSync (react-dom-client.development.js:18804:11) at performWorkOnRoot (react-dom-client.development.js:17912:35) at performWorkOnRootViaSchedulerTask (react-dom-client.development.js:20382:7) at MessagePort.performWorkUntilDeadline (scheduler.development.js:45:48)]
+
 My application context:
 - This happened when I was trying to [ convert the date format]
 - I'm using [Next js, javascript]
@@ -573,7 +574,7 @@ The date output:
 ## 8. Understanding a code suggestion
 Prompt
 ```text
-you have suggested a code for me that i have never encountered as a junior dev. this is the code:
+You have suggested a code for me that I have never encountered as a junior dev. This is the code:
 
 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M3 6h18"></path>
@@ -662,3 +663,4 @@ Code structure overview:
 
 Summary:
 The README was generated and then thoroughly reviewed and edited for clarity and completeness.
+

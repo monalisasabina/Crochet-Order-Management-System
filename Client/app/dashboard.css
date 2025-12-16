@@ -40,6 +40,71 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
+
+
+
+/* Notification Header with Bell and Badge */
+.notification-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #2c3e50;
+  margin-bottom: 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-bottom: 2px solid #D6536D;
+  padding-bottom: 0.5rem;
+}
+
+.bell-icon {
+  font-size: 1.3rem;
+  animation: bellRing 2s ease-in-out infinite;
+}
+
+@keyframes bellRing {
+  0%, 100% { transform: rotate(0deg); }
+  10%, 30% { transform: rotate(-10deg); }
+  20%, 40% { transform: rotate(10deg); }
+  50% { transform: rotate(0deg); }
+}
+
+.unread-badge {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  margin-left: 0.5rem;
+  box-shadow: 0 2px 6px rgba(255, 107, 107, 0.4);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Section Headings */
 .notifications h2,
 .orders h2,

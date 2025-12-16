@@ -161,9 +161,9 @@ export default function Orders(){
                         {/* Order Details */}
                         <div className='order-details'>
                             <h2>{order.title}</h2>
-                            <p>Client: {order.client.firstName} {order.client.lastName}</p>
-                            <p>Start Date: {formatDate(order.startDate)}</p>
-                            <p>End Date: {formatDate(order.endDate)}</p>
+                            <p> <strong>Client:</strong> {order.client.firstName} {order.client.lastName}</p>
+                            <p><strong>Start Date:</strong> {formatDate(order.startDate)}</p>
+                            <p><strong>End Date:</strong> {formatDate(order.endDate)}</p>
 
                             {/* status toggle */}
                              <OrderStatus 
