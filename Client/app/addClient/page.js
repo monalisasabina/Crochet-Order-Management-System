@@ -49,25 +49,40 @@ export default function AddClientPage() {
 
          {/* First Name */}
          <label>First Name</label>
-         <input name="firstName" value={formData.firstName} onChange={handleChange} required />
+         <input 
+              name="firstName" 
+              value={formData.firstName} 
+              onChange={handleChange} 
+              required 
+         />
 
         {/* Last Name */}
         <label>Last Name</label>
-        <input name="lastName" value={formData.lastName} onChange={handleChange} required />
+        <input 
+              name="lastName" 
+              value={formData.lastName} 
+              onChange={handleChange} 
+              required />
 
          {/* Mobile */}
         <label>Mobile</label>
-        <input name="mobile" value={formData.mobile} onChange={handleChange}/>
+        <input 
+              name="mobile" 
+              value={formData.mobile} 
+              onChange={handleChange}
+        />
 
          {/* Submit button */}
-        <button type="submit">Add Client</button>
-        </form>
+        <button 
+               type="submit">Add Client
+        </button>
+    </form>
 
-        {/*Status*/}
-        {message && <p className="client-message">{message}</p>}
+    {/*Status*/}
+    {message && <p className="client-message">{message}</p>}
       
-        {/* Client Preview */}
-        {preview && (
+    {/* Client Preview */}
+    {preview && (
         <div className="client-preview">
             <h2>Client Preview</h2>
             <p><strong>Full Name:</strong> {preview.firstName} {preview.lastName} </p>
@@ -76,6 +91,7 @@ export default function AddClientPage() {
 
         </div>
       )}
+      
     </div>
   );
 }

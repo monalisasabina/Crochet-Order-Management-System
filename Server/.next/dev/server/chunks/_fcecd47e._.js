@@ -89,7 +89,18 @@ async function POST(request) {
             }
         });
         console.log('Created new order:', newOrder);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(newOrder, {
+        // Creating notification
+        const orderNotification = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].notification.create({
+            data: {
+                message: `Order "${newOrder.title}" created for client ID ${newOrder.clientId}.`,
+                isRead: false
+            }
+        });
+        console.log("Created notification:", orderNotification);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            order: newOrder,
+            notification: orderNotification
+        }, {
             status: 201,
             headers: corsHeaders
         });

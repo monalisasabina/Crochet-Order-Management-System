@@ -1,0 +1,100 @@
+/* Container */
+.client-list-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border-radius: 8px;
+  background-color: #fafafa;
+  box-sizing: border-box;
+}
+
+/* Heading */
+.client-list-container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #D6536D;
+  font-size: 1.8rem;
+}
+
+/* Empty message */
+.empty-message {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+/* Card grid */
+.client-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+/* Modern scrollbar styling */
+.client-cards::-webkit-scrollbar {
+  width: 8px;
+}
+.client-cards::-webkit-scrollbar-thumb {
+  background: #D6536D;
+  border-radius: 4px;
+}
+.client-cards::-webkit-scrollbar-track {
+  background: #f3f3f3;
+}
+
+
+/* Individual card */
+.client-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1rem;
+  background: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.client-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Card heading */
+.client-card h2 {
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+/* Card text */
+.client-card p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Accent for strong labels */
+.client-card strong {
+  color: #D6536D;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  .client-list-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .client-card {
+    padding: 0.8rem;
+  }
+
+  .client-card h2 {
+    font-size: 1.1rem;
+  }
+
+  .client-card p {
+    font-size: 0.9rem;
+  }
+}

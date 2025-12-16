@@ -30,7 +30,7 @@ function getNotificationId(request){
 function invalidResponse(request){
     return NextResponse.json(
         { error: "Invalid notification ID" },
-        { status: 400, header: corsHeaders }
+        { status: 400, headers: corsHeaders }
     )
 }
 
@@ -58,10 +58,10 @@ export async function GET(request) {
     }
 
     // Returning response 
-    return NextResponse.json(notification, { status: 200 });
+    return NextResponse.json(notification, { status: 200, headers: corsHeaders });
     } catch (error) {
         console.error('Error fetching notification by ID:', error);
-        return NextResponse.json({ error: 'Failed to fetch notification' }, { status: 500, header: corsHeaders });
+        return NextResponse.json({ error: 'Failed to fetch notification' }, { status: 500, headers: corsHeaders });
     }
 }
 
@@ -90,11 +90,11 @@ export async function PATCH(request) {
 
         console.log('Updated notification:', updatedNotification);
 
-        return NextResponse.json(updatedNotification, { status: 200, header: corsHeaders });
+        return NextResponse.json(updatedNotification, { status: 200, headers: corsHeaders });
 
     } catch (error) {
         console.error('Error updating notification:', error);
-        return NextResponse.json({ error: 'Failed to update notification' }, { status: 500, header: corsHeaders });
+        return NextResponse.json({ error: 'Failed to update notification' }, { status: 500, headers: corsHeaders });
     }               
 
 }
@@ -118,12 +118,12 @@ export async function DELETE(request) {
 
         return NextResponse.json(
             { message: 'Notification deleted successfully' },
-            { status: 200, header: corsHeaders }
+            { status: 200, headers: corsHeaders }
         );
 
     } catch (error) {
         console.error('Error deleting notification:', error);
-        return NextResponse.json({ error: 'Failed to delete notification' }, { status: 500, header: corsHeaders });
+        return NextResponse.json({ error: 'Failed to delete notification' }, { status: 500, headers: corsHeaders });
     }               
 
 }

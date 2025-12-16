@@ -42,15 +42,21 @@ import { usePathname } from 'next/navigation';
                   > ORDERS
             </Link>
 
-               <Link 
+            <Link 
+                  href="/clients"
+                  className={`nav-link ${pathname === '/clients' ? 'active' : ''}`}
+                  > CLIENTS
+            </Link>
+
+            <Link 
                   href="/addOrder"
-                  className={`nav-link ${pathname === '/orders' ? 'active' : ''}`}
+                  className={`nav-link ${pathname === '/addOrder' ? 'active' : ''}`}
                   > ADD AN ORDER
             </Link>
 
                <Link 
                   href="/addClient"
-                  className={`nav-link ${pathname === '/orders' ? 'active' : ''}`}
+                  className={`nav-link ${pathname === '/addClient' ? 'active' : ''}`}
                   > ADD CLIENT
             </Link>
         </nav>

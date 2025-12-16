@@ -6,6 +6,7 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #fafafa;
+  box-sizing: border-box;
 }
 
 /* Heading */
@@ -13,44 +14,48 @@
   text-align: center;
   margin-bottom: 1.5rem;
   color: #333;
+  font-size: 1.5rem;
 }
 
 /* Form layout */
 .client-form {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
 
 /* Labels */
 .client-form label {
-  margin-top: 1rem;
   font-weight: bold;
   color: #444;
+  font-size: 1rem;
 }
 
 /* Inputs */
 .client-form input {
   padding: 0.6rem;
-  margin-top: 0.3rem;
   border: 1px solid #aaa;
   border-radius: 4px;
   font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Button */
 .client-form button {
-  margin-top: 1.5rem;
   padding: 0.8rem;
-  background: #28a745; /* green for success */
+  background: #D6536D;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 1rem;
+  transition: background 0.3s ease;
 }
 
 .client-form button:hover {
-  background: #218838;
+  background: #F3B6C2;
 }
 
 /* Success/Error message */
@@ -59,9 +64,10 @@
   text-align: center;
   font-weight: bold;
   color: #0069d9;
+  font-size: 1rem;
 }
 
-/* client preview */
+/* Client preview */
 .client-preview {
   margin-top: 2rem;
   padding: 1rem;
@@ -73,9 +79,34 @@
 .client-preview h2 {
   margin-bottom: 1rem;
   color: #333;
+  font-size: 1.2rem;
 }
 
 .client-preview p {
   margin: 0.5rem 0;
   font-size: 1rem;
+}
+
+/* 📱 Responsive tweaks */
+@media (max-width: 480px) {
+  .client-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .client-container h1 {
+    font-size: 1.3rem;
+  }
+
+  .client-form label,
+  .client-form input,
+  .client-form button,
+  .client-message,
+  .client-preview p {
+    font-size: 0.95rem;
+  }
+
+  .client-form button {
+    padding: 0.7rem;
+  }
 }
