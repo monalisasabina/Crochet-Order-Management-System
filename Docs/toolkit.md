@@ -73,3 +73,30 @@ Frontend:
 ```http://localhost:4000```
 Backend:
 ```http://localhost:3000```
+
+
+
+### 5. AI Prompt journal
+
+| # | Prompt Theme                          | Key Takeaways |
+|---|--------------------------------------|---------------|
+| 1 | Next.js Installation (9/12/2025)     | - Requires Node.js ≥18.17, Windows/macOS/Linux, modern browser.<br>- Install via `npx create-next-app@latest my-app`.<br>- Recommended project structure: `client/` for frontend, `server/` for backend, root `package.json`. |
+| 2 | Client-Side Routing (11/12/2025)     | - Next.js uses file-system routing (`pages/` or `app/`) instead of central `<Router>`.<br>- Pages are mapped to URLs automatically.<br>- Next.js supports JS or TS; choose JS with `--javascript` flag. |
+| 3 | Setting up the Backend                | - Next.js backend uses JS/TS and Prisma; API routes in `app/api/<route>/route.js`.<br>- Python uses Flask & SQLAlchemy.<br>- Prisma setup: `prisma/` for models, `lib/prisma.js` for client, `.env` for DB.<br>- Use REST API endpoints for CRUD operations. |
+| 4 | Setting up Models (Prisma)           | - Define models in `schema.prisma`.<br>- Supports one-to-one, one-to-many, many-to-many relationships.<br>- Run migrations after modeling: `npx prisma migrate dev --name <name>`.<br>- Use Prisma Studio to inspect DB. |
+| 5 | Verification of Prisma Models         | - Models mostly valid; minor fixes:<br>  - Field names camelCase.<br>  - `endDate` optional in Order.<br>  - Add `updatedAt`, `unique` constraints.<br>  - Notification model needs Boolean `isRead`, `message`, `createdAt`.<br>- Python habits noticed: explicit join tables, developing tables first. |
+| 6 | Code Readability Improvement          | - Repeated ID extraction/validation should use helper function.<br>- Better naming: `id→clientId`, `body→updatedData`.<br>- Break down logic, separate error handling.<br>- Maintain consistent style and spacing. |
+| 7 | Error Message Translation             | - `toLocaleDateString` error: `order.startDate` not a Date object (likely ISO string from API).<br>- Debug: log value/type, wrap in `new Date()` before formatting.<br>- Use helper function `formatDate` for safe date formatting. |
+| 8 | Understanding SVG Code                | - `<svg>` is Scalable Vector Graphics; code-defined images.<br>- Attributes: `width/height`, `viewBox`, `fill`, `stroke`.<br>- `<path>` and `<line>` draw the image.<br>- Specialized roles: SVG designers, illustrators, animators. |
+| 9 | Project README Generation             | - README includes project title, description, features, installation, usage, configuration, troubleshooting, contributing, license, and folder structure overview (`client/`, `server/`). |
+| 10| React/Flask API vs Next.js            | - Next.js enforces stricter data handling for security, edge runtime, and consistency.<br>- Community acknowledges Next.js is strict compared to Flask.<br>- Comparison: <br>  - Next.js: SSR, SEO, React integration, stricter rules.<br>  - Flask: lightweight, flexible, easy prototypes, less built-in tooling. |
+
+
+### 6. References
+
+- **Next.js vs React.js**: [https://www.freecodecamp.org/news/nextjs-vs-react-differences/](https://www.freecodecamp.org/news/nextjs-vs-react-differences/)
+- **Next.js Documentation**: [https://nextjs.org/docs](https://nextjs.org/docs)
+- **How to use Prisma ORM with Next.js**: [https://www.prisma.io/docs/guides/nextjs](https://www.prisma.io/docs/guides/nextjs)
+- **Prisma Next.js database guide**: [https://www.prisma.io/docs/guides/nextjs](https://www.prisma.io/docs/guides/nextjs)
+- **Prisma with SQLite Quickstart**: [https://www.prisma.io/docs/getting-started/prisma-orm/quickstart/sqlite](https://www.prisma.io/docs/getting-started/prisma-orm/quickstart/sqlite)
+- **Markdown Tables Guide**: [https://www.markdownguide.org/extended-syntax/#tables](https://www.markdownguide.org/extended-syntax/#tables)
