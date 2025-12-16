@@ -1,5 +1,6 @@
-# Crochet Order Management System
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=JavaScript&logoColor=000&style=flat-square)
 
+# Crochet Order Management System
 A web-based system to manage and track crochet orders, designed to help artisans and small businesses efficiently manage client orders and maintain client information.
 
 ---
@@ -106,29 +107,29 @@ PORT=4000 npm run dev
 5. View past and ongoing orders in a structured interface.
 
 
-### Configuration
-#### - Environment Variables:
+## Configuration
+### - Environment Variables:
 Create a .env file in the server directory to configure backend options:
 ```bash
 PORT=4000
 DATABASE_URL=<your-database-url>
 ```
-#### - Frontend Configuration:
+### - Frontend Configuration:
 Update API endpoint URLs in the frontend .env.local file if different from defaults.
 
 
-### Troubleshooting
-##### - Frontend does not start:
+## Troubleshooting
+#### - Frontend does not start:
 Ensure you are in the client directory and all dependencies are installed.
 
-##### Backend API errors:
+#### Backend API errors:
 Check .env configuration and ensure the database is running.
 
-##### Port conflicts:
+#### Port conflicts:
 Make sure the ports 3000 (frontend) and 5000 (backend) are free.
 
 
-### Code 
+## Code Structure
 ```pgsql
 
 crochet-order-management-system/
@@ -149,7 +150,8 @@ crochet-order-management-system/
 
 ```
 
-### Contributing
+
+## Contributing
 1. Fork the repository
 
 2. Create a feature branch (git checkout -b feature-name)
@@ -162,5 +164,6 @@ crochet-order-management-system/
 
 Please follow the code style and maintain clean, readable code.
 
-### License
-This project is licensed under the MIT License
+
+## License
+This project is licensed under the [MIT License](LICENSE).
